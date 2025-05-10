@@ -11,11 +11,12 @@ let first = "";
 let operation = "";
 let second = "";
 let solution = "";
-
+let errorMessage = "";
 function clearAll() {
   first = "";
   operation = "";
   second = "";
+  errorMessage = "";
 }
 
 button.forEach((element) => {
@@ -31,12 +32,20 @@ button.forEach((element) => {
       second += element.id;
       console.log(` 2nd: ${second}`);
     }
+    if (solution && !operation && second) {
+      errorMessage = "Error";
+      console.log("error");
+    }
     if (operators.includes(element.id) && first && second) {
     } else if (operators.includes(element.id) && first) {
       operation = element.id;
       console.log(` Opp: ${operation}`);
     }
-    output.textContent = `${first} ${operation} ${second}`;
+    if (errorMessage === "") {
+      output.textContent = `${first} ${operation} ${second}`;
+    } else {
+      output.textContent = errorMessage;
+    }
   });
 });
 
@@ -63,10 +72,11 @@ function operations(numberOne, operator, numberTwo) {
     return add(array);
 
     function add(array) {
-      let solution = array.reduce(
+      let subSolution = array.reduce(
         (total, current) => total + Number(current),
         0
       );
+      let solution = Math.floor(subSolution * 100) / 100;
       console.log(`Sum of ${solution}`);
       return solution;
     }
@@ -74,22 +84,33 @@ function operations(numberOne, operator, numberTwo) {
     return subtract(array);
 
     function subtract(array) {
-      let solution = array.reduce((total, current) => total - Number(current));
+      let subSolution = array.reduce(
+        (total, current) => total - Number(current)
+      );
+
+      let solution = Math.floor(subSolution * 100) / 100;
       console.log(`Total of ${solution}`);
       return solution;
     }
   } else if (operator === "*") {
     return multiply(array);
     function multiply(array) {
-      let solution = array.reduce((total, current) => total * Number(current));
+      let subSolution = array.reduce(
+        (total, current) => total * Number(current)
+      );
 
+      let solution = Math.floor(subSolution * 100) / 100;
       console.log(`Total of ${solution}`);
       return solution;
     }
   } else if (operator === "/") {
     return divide(array);
     function divide(array) {
-      let solution = array.reduce((total, current) => total / Number(current));
+      let subSolution = array.reduce(
+        (total, current) => total / Number(current)
+      );
+
+      let solution = Math.floor(subSolution * 100) / 100;
 
       console.log(`Total of ${solution}`);
       return solution;
