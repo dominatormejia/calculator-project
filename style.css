@@ -61,6 +61,7 @@ h1 {
   align-items: center;
   width: 60vh;
   border-bottom: 2px solid black;
+  padding: 5px;
 }
 
 .output {
