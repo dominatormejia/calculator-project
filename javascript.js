@@ -12,6 +12,8 @@ let operation = "";
 let second = "";
 let solution = "";
 let errorMessage = "";
+
+
 function clearAll() {
   first = "";
   operation = "";

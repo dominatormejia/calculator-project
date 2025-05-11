@@ -4,18 +4,26 @@ const operator = document.querySelectorAll(".operator");
 const firstNumber = document.querySelectorAll(".number");
 const equal = document.querySelector(".equals");
 const total = document.querySelector(".total");
-const clear = document.querySelector(".clear");
+const clear = document.querySelector(".ac");
 const operators = ["/", "*", "-", "+"];
 const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
+const negativePositive = document.querySelector(".negative");
+let negative = "-";
 let first = "";
 let operation = "";
 let second = "";
 let solution = "";
+let errorMessage = "";
 
 function clearAll() {
   first = "";
   operation = "";
   second = "";
+  errorMessage = "";
+}
+
+function round(input) {
+  return Math.floor(input * 100) / 100;
 }
 
 button.forEach((element) => {
@@ -31,13 +39,45 @@ button.forEach((element) => {
       second += element.id;
       console.log(` 2nd: ${second}`);
     }
+    if (solution && !operation && second) {
+      first = second;
+      second = "";
+      solution = "";
+      operation = "";
+    }
     if (operators.includes(element.id) && first && second) {
     } else if (operators.includes(element.id) && first) {
       operation = element.id;
       console.log(` Opp: ${operation}`);
     }
-    output.textContent = `${first} ${operation} ${second}`;
+    if (errorMessage === "") {
+      output.textContent = `${first} ${operation} ${second}`;
+    } else {
+      output.textContent = errorMessage;
+    }
   });
+});
+
+negativePositive.addEventListener("click", () => {
+  if (first && operation && second === "") {
+    let tempFirst = first;
+    first = "";
+    first += "-" + tempFirst;
+    output.textContent = `${first} ${operation}`;
+  } else if (first && second === "") {
+    let tempFirst = first;
+    first = "";
+    first += "-" + tempFirst;
+    output.textContent = first;
+  } else if (first && second) {
+    let tempSecond = second;
+    second = "";
+    second += "-" + tempSecond;
+    output.textContent = `${first} ${operation} ${second}`;
+  } else {
+    clearAll();
+    output.textContent = "Calculate";
+  }
 });
 
 equal.addEventListener("click", () => {
@@ -63,35 +103,39 @@ function operations(numberOne, operator, numberTwo) {
     return add(array);
 
     function add(array) {
-      let solution = array.reduce(
+      let subSolution = array.reduce(
         (total, current) => total + Number(current),
         0
       );
-      console.log(`Sum of ${solution}`);
+      solution = round(subSolution);
       return solution;
     }
   } else if (operator === "-") {
     return subtract(array);
 
     function subtract(array) {
-      let solution = array.reduce((total, current) => total - Number(current));
-      console.log(`Total of ${solution}`);
+      let subSolution = array.reduce(
+        (total, current) => total - Number(current)
+      );
+      solution = round(subSolution);
       return solution;
     }
   } else if (operator === "*") {
     return multiply(array);
     function multiply(array) {
-      let solution = array.reduce((total, current) => total * Number(current));
-
-      console.log(`Total of ${solution}`);
+      let subSolution = array.reduce(
+        (total, current) => total * Number(current)
+      );
+      solution = round(subSolution);
       return solution;
     }
   } else if (operator === "/") {
     return divide(array);
     function divide(array) {
-      let solution = array.reduce((total, current) => total / Number(current));
-
-      console.log(`Total of ${solution}`);
+      let subSolution = array.reduce(
+        (total, current) => total / Number(current)
+      );
+      solution = round(subSolution);
       return solution;
     }
   }

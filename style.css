@@ -15,27 +15,30 @@ h1 {
 .wrapper {
   display: flex;
   flex-wrap: wrap;
-  width: 50vh;
-  height: 60vh;
+  max-width: 350px;
+  max-height: 450px;
+  justify-content: center;
   align-items: center;
-  margin: auto;
+  margin: 0 auto;
   border: 2px solid black;
   background-color: #282828;
   border-radius: 20px;
-  overflow: scroll;
+  overflow: hidden;
 }
+
 .number-wrapper {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  width: 35vh;
-  height: 40vh;
+  max-width: 200px;
+  max-height: 40vh;
 }
 
 .operator-wrapper {
   display: flex;
+  align-items: center;
   flex-direction: column;
-  flex-grow: 1;
+  width: 100px;
   margin-left: auto;
   margin-top: -80px;
 }
@@ -60,6 +63,11 @@ h1 {
 .button:hover {
   background-color: orange;
   color: black;
+}
+
+.operator:hover {
+  background-color: #515151;
+  color: white;
 }
 
 .output-wrapper {
@@ -90,8 +98,10 @@ h1 {
 
 .clear {
   display: flex;
+  gap: 5px;
   align-items: center;
-  width: 30vh;
+  height: auto;
+  margin-right: auto;
 }
 
 .equal {
@@ -108,4 +118,28 @@ h1 {
 
 .number {
   background: #515151;
+}
+
+.button {
+  border: none;
+}
+
+/* Media query for larger screens */
+@media (min-width: 1100px) {
+  .output {
+    font-size: 40px;
+  }
+
+  .total {
+    font-size: 40px;
+  }
+  .number-wrapper {
+    max-height: 300px;
+  }
+}
+/* Media query for smaller screens */
+@media (min-width: 400px) {
+  .number-wrapper {
+    max-height: 300px;
+  }
 }
