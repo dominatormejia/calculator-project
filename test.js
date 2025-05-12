@@ -8,6 +8,8 @@ const clear = document.querySelector(".ac");
 const operators = ["/", "*", "-", "+"];
 const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
 const negativePositive = document.querySelector(".negative");
+const percentage = document.querySelector(".percentage");
+const period = document.querySelector(".period");
 let negative = "-";
 let first = "";
 let operation = "";
@@ -59,24 +61,43 @@ button.forEach((element) => {
 });
 
 negativePositive.addEventListener("click", () => {
-  if (first && operation && second === "") {
-    let tempFirst = first;
-    first = "";
-    first += "-" + tempFirst;
-    output.textContent = `${first} ${operation}`;
-  } else if (first && second === "") {
-    let tempFirst = first;
-    first = "";
-    first += "-" + tempFirst;
-    output.textContent = first;
-  } else if (first && second) {
-    let tempSecond = second;
-    second = "";
-    second += "-" + tempSecond;
-    output.textContent = `${first} ${operation} ${second}`;
+  if (parseInt(first) > 0) {
+    if (solution) {
+      let tempSolution = solution;
+      solution = "";
+      solution += "-" + tempSolution;
+      output.textContent = solution;
+    } else if (first && operation && second === "" && solution === "") {
+      let tempFirst = first;
+      first = "";
+      first += "-" + tempFirst;
+      output.textContent = `${first} ${operation}`;
+    } else if (first && second === "") {
+      let tempFirst = first;
+      first = "";
+      first += "-" + tempFirst;
+      output.textContent = first;
+    } else if (first && second) {
+      second = second.startsWith("-") ? second.slice(1) : "-" + second;
+      output.textContent = `${first} ${operation} ${second}`;
+    } else {
+      clearAll();
+      output.textContent = "Calculate";
+    }
   } else {
-    clearAll();
-    output.textContent = "Calculate";
+    if (solution) {
+      solution = String(solution).slice(1);
+      output.textContent = solution;
+    } else if (first && operation && second === "" && solution === "") {
+      first = String(first).slice(1);
+      output.textContent = `${first} ${operation}`;
+    } else if (first && second === "") {
+      first = String(first).slice(1);
+      output.textContent = first;
+    } else {
+      clearAll();
+      output.textContent = "Calculate";
+    }
   }
 });
 
@@ -94,6 +115,53 @@ clear.addEventListener("click", () => {
   output.textContent = "Calculate";
   clearAll();
   solution = "";
+});
+
+operator.forEach((element) => {
+  element.addEventListener("click", (element) => {
+    if (first === "" && solution === "") {
+      clearAll();
+      output.textContent = "Calculate";
+    }
+  });
+});
+
+period.addEventListener("click", () => {
+  if (solution) {
+    // solution = solution + ".";
+    solution = solution.includes(".") ? solution : solution + ".";
+    output.textContent = solution;
+  } else if (first && second) {
+    // second = second + ".";
+    second = second.includes(".") ? second : second + ".";
+    output.textContent = `${first} ${operation} ${second}`;
+  } else if (first && operation === "" && second === "") {
+    // first = first + ".";
+    first = first.includes(".") ? first : first + ".";
+    output.textContent = first;
+  } else if (first === "") {
+    clearAll();
+    output.textContent = "Calculate";
+  }
+});
+
+percentage.addEventListener("click", () => {
+  if (solution) {
+    solution = solution / 100;
+    output.textContent = solution;
+  } else if (first && second) {
+    second = second / 100;
+    output.textContent = `${first} ${operation} ${second}`;
+  } else if (first && operation) {
+    first = first / 100;
+    output.textContent = `${first} ${operation}`;
+  } else if (first) {
+    first = first / 100;
+    output.textContent = `${first}`;
+  } else {
+    clearAll();
+    output.textContent = "Calculate";
+  }
 });
 
 function operations(numberOne, operator, numberTwo) {
