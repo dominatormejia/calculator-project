@@ -129,3 +129,9 @@ h1 {
     max-height: 300px;
   }
 }
+
+@media only screen and (width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) {
+  .number-wrapper {
+    max-height: 300px;
+  }
+}
