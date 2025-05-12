@@ -130,6 +130,27 @@ h1 {
   }
 }
 
+@media (min-width: 300px) and (max-width: 600px) {
+  .number-wrapper {
+    max-height: 300px;
+    margin-top: -60px;
+  }
+  .clear {
+    min-width: 90px;
+    margin-top: -25px;
+  }
+  .wrapper {
+    min-height: 500px;
+  }
+  .operator-wrapper {
+    max-width: 80px;
+    min-height: 300px;
+  }
+  .wrapper {
+    gap: 40px;
+  }
+}
+
 @media only screen and (width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) {
   .number-wrapper {
     max-height: 300px;
