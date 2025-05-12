@@ -61,7 +61,7 @@ button.forEach((element) => {
 });
 
 negativePositive.addEventListener("click", () => {
-  if (parseInt(first) > 0) {
+  if (parseInt(first) >= 0 || parseInt(second) >= 0) {
     if (solution) {
       let tempSolution = solution;
       solution = "";
