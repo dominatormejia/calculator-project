@@ -124,20 +124,6 @@ h1 {
   border: none;
 }
 
-/* Media query for larger screens */
-@media (min-width: 2000px) and (max-width: 2000px) {
-  .output {
-    font-size: 40px;
-  }
-
-  .total {
-    font-size: 40px;
-  }
-  .number-wrapper {
-    max-height: 300px;
-  }
-}
-/* Media query for smaller screens */
 @media (min-width: 100px) and (max-width: 1999px) {
   .number-wrapper {
     max-height: 300px;
